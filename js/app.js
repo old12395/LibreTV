@@ -156,55 +156,7 @@ function addAdultAPI() {
 }
 
 // 检查是否有成人API被选中
-function checkAdultAPIsSelected() {
-    // 查找所有内置成人API复选框
-    const adultBuiltinCheckboxes = document.querySelectorAll('#apiCheckboxes .api-adult:checked');
 
-    // 查找所有自定义成人API复选框
-    const customApiCheckboxes = document.querySelectorAll('#customApisList .api-adult:checked');
-
-    const hasAdultSelected = adultBuiltinCheckboxes.length > 0 || customApiCheckboxes.length > 0;
-
-    const yellowFilterToggle = document.getElementById('yellowFilterToggle');
-    const yellowFilterContainer = yellowFilterToggle.closest('div').parentNode;
-    const filterDescription = yellowFilterContainer.querySelector('p.filter-description');
-
-    // 如果选择了成人API，禁用黄色内容过滤器
-    if (hasAdultSelected) {
-        yellowFilterToggle.checked = false;
-        yellowFilterToggle.disabled = true;
-        localStorage.setItem('yellowFilterEnabled', 'false');
-
-        // 添加禁用样式
-        yellowFilterContainer.classList.add('filter-disabled');
-
-        // 修改描述文字
-        if (filterDescription) {
-            filterDescription.innerHTML = '<strong class="text-pink-300">选中黄色资源站时无法启用此过滤</strong>';
-        }
-
-        // 移除提示信息（如果存在）
-        const existingTooltip = yellowFilterContainer.querySelector('.filter-tooltip');
-        if (existingTooltip) {
-            existingTooltip.remove();
-        }
-    } else {
-        // 启用黄色内容过滤器
-        yellowFilterToggle.disabled = false;
-        yellowFilterContainer.classList.remove('filter-disabled');
-
-        // 恢复原来的描述文字
-        if (filterDescription) {
-            filterDescription.innerHTML = '过滤"伦理片"等黄色内容';
-        }
-
-        // 移除提示信息
-        const existingTooltip = yellowFilterContainer.querySelector('.filter-tooltip');
-        if (existingTooltip) {
-            existingTooltip.remove();
-        }
-    }
-}
 
 // 渲染自定义API列表
 function renderCustomAPIsList() {
